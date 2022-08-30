@@ -1,0 +1,51 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Table Name:tbl_Student
+model Students {
+  stud_ID String @id @default(cuid())
+  fname   String
+  lname   String
+  gender  String
+  age     Int
+}
+
+// Table Name: tbl_Instructor
+model Instructor {
+  ins_ID String @id @default(cuid())
+  fname  String
+  lname  String
+  gender String
+  age    Int
+}
+
+// Table Name:tbl_ Course
+model Course {
+  course_ID   String     @id @default(cuid())
+  course_name String
+  course_desc String
+  school_yr   Int
+  semester    Int
+  subject     Subjects[]
+}
+
+// Table Name: tbl_Subjects
+model Subjects {
+  sub_ID       String @id @default(cuid())
+  subject_name String
+  course_sub   Course @relation(fields: [id_course], references: [course_ID])
+  id_course    String
+}
+
+// Table Name: tbl_Schedules
+
+// Table Name:tbl_Transactions
